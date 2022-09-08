@@ -18,6 +18,7 @@
     </head>
     <body>
         <script src="https://cdn.babylonjs.com/babylon.js"></script>
+        <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
         <canvas id="render-canvas"></canvas>        
         <script>
             var canvas = document.getElementById("render-canvas");
@@ -41,6 +42,18 @@
             torus.rotation.x = 1.5;
 
             torus.material = boxMaterial;
+
+            var meshisin = BABYLON.AbstractMesh;
+            var importCube;
+            meshisin = BABYLON.SceneLoader.ImportMesh("","/","cube.glb",scene, function (newMeshes){
+                let blue = newMeshes[0];                
+            });
+
+            setTimeout(function(){
+                blue.position = new BABYLON.Vector3(0,0,0);
+                blue.rotation.y = Math.PI / 2;
+                blue.material = boxMaterial;
+            },1000);
 
             var t = 0;
             var renderLoop = function(){
